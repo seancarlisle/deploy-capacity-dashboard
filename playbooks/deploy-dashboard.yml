@@ -44,7 +44,7 @@
     command: "influx -execute \"CREATE USER script_user WITH PASSWORD '{{ influxdb_script_user_password }}'\""
    # delegate_to: log_hosts
   - name: Grant permissions to the capacity script user
-    command: "influx -execute \"USE capacity;GRANT ALL ON capacity TO script_user\"" 
+    command: "influx -execute \"GRANT ALL ON capacity TO script_user\"" 
   - name: Ensure the grafana user is created
     #influxdb_user:
     #  hostname: "localhost"
@@ -54,4 +54,4 @@
     #delegate_to: log_hosts
     command: "influx -execute \"CREATE USER grafana_user WITH PASSWORD '{{ influxdb_grafana_user_password }}'\""
   - name: Grant permissions to the grafana user
-    command: "influx -execute \"USE capacity;GRANT READ ON 'capacity' TO 'grafana_user'\""
+    command: "influx -execute \"GRANT READ ON capacity TO grafana_user\""
