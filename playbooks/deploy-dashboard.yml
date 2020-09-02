@@ -51,5 +51,6 @@
     #  password: "{{ influxdb_grafana_user_password }}"
     #  # TODO: grant ability isn't available until ansible 2.8....
     #delegate_to: log_hosts
+    command: "influx -execute \"CREATE USER grafana_user WITH PASSWORD '{{ influxdb_grafana_user_password }}'\""
   - name: Grant permissions to the grafana user
     command: "influx -execute \"USE capacity;GRANT READ ON 'capacity' TO 'grafana_user'\""
