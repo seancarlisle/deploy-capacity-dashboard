@@ -1,0 +1,50 @@
+---
+
+- name: Deploy the capacity monitoring dashboard
+  hosts: log_hosts
+  pre-tasks:
+  - name: Ensure Python3 requirements are in place
+    apt:
+      cache: updated
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - python3
+    - python3-venv
+  tasks:
+  - name: Add the InfluxDB repo key
+    apt_key:
+      url: https://repos.influxdata.com/influxdb.key
+  - name: Add the InfluxDB repository
+    apt_repository:
+      filename: influxdb.list
+      repo: "deb https://repos.influxdata.com/ubuntu xenial stable"
+  - name: Install InfluxDB
+    apt:
+      name: influxdb
+  - name: Ensure InfluxDB is started
+    systemd:
+      name: influxdb.service
+      daemon_reload: yes
+      enabled: yes
+      state: started
+  - name: Create the capacity database
+    influxdb_database:
+      hostname: "localhost"
+      database_name: "capacity"
+    delegate_to: log_hosts
+  - name: Ensure the capacity script user is created
+    influxdb_user:
+      hostname: "localhost"
+      user_name: "script_user"
+      password: "{{ influxdb_script_user_password }}"
+      # TODO: grant ability isn't available until ansible 2.8....
+    delegate_to: log_hosts
+   - name: Ensure the grafana user is created
+     influxdb_user:
+       hostname: "localhost"
+       user_name: "grafana_user"
+       password: "{{ influxdb_grafana_user_password }}"
+       # TODO: grant ability isn't available until ansible 2.8....
+     delegate_to: log_hosts
+ 
