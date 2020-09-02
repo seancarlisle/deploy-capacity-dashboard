@@ -30,10 +30,11 @@
       enabled: yes
       state: started
   - name: Create the capacity database
-    influxdb_database:
-      hostname: "localhost"
-      database_name: "capacity"
-    delegate_to: log_hosts
+    #influxdb_database:
+    #  hostname: "localhost"
+    #  database_name: "capacity"
+    #delegate_to: log_hosts
+    command: "influx -execute \"CREATE DATABASE capacity\""
   - name: Ensure the capacity script user is created
    # influxdb_user:
    #   hostname: "localhost"
