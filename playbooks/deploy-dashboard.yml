@@ -41,11 +41,11 @@
       password: "{{ influxdb_script_user_password }}"
       # TODO: grant ability isn't available until ansible 2.8....
     delegate_to: log_hosts
-   - name: Ensure the grafana user is created
-     influxdb_user:
-       hostname: "localhost"
-       user_name: "grafana_user"
-       password: "{{ influxdb_grafana_user_password }}"
-       # TODO: grant ability isn't available until ansible 2.8....
-     delegate_to: log_hosts
+  - name: Ensure the grafana user is created
+    influxdb_user:
+      hostname: "localhost"
+      user_name: "grafana_user"
+      password: "{{ influxdb_grafana_user_password }}"
+      # TODO: grant ability isn't available until ansible 2.8....
+    delegate_to: log_hosts
  
