@@ -2,6 +2,7 @@
 
 - name: Deploy the capacity monitoring dashboard
   hosts: log_hosts
+  vars_files: vars.yml
   pre-tasks:
   - name: Ensure Python3 requirements are in place
     apt:
