@@ -72,3 +72,16 @@
       daemon_reload: yes
       enabled: yes
       state: started
+  # TODO: Galera config and dashboard definitions go here
+  - name: Create the python virtual environment
+    command: "python3 -m venv /root/capacity_gather"
+  - name: Install required python libraries
+    command: "/root/capacity_gather/bin/pip3 install {{ item }}"
+    with_items:
+      - wheel
+      - shade
+      - influxdb
+  - name: Clone the capacity-script repository
+    git:
+      repo: "https://github.com/seancarlisle/capacity-script"
+      dest: "/root/capacity_gather"
