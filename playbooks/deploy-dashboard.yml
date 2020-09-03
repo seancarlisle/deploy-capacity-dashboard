@@ -68,7 +68,7 @@
       name: grafana
   - name: Ensure Grafana is started
     systemd:
-      name: grafana.service
+      name: grafana-server.service
       daemon_reload: yes
       enabled: yes
       state: started
