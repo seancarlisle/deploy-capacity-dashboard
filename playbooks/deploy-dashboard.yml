@@ -87,6 +87,7 @@
       dest: "/root/capacity_gather/capacity-script"
   - name: Add script run to crontab
     cron:
+      name: "capacity gathering script"
       minute: "*/2"
       hour: "*"
       day: "*"
