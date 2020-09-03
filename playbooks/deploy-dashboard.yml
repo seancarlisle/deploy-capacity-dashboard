@@ -84,4 +84,4 @@
   - name: Clone the capacity-script repository
     git:
       repo: "https://github.com/seancarlisle/capacity-script"
-      dest: "/root/capacity_gather"
+      dest: "/root/capacity_gather/capacity-script"
