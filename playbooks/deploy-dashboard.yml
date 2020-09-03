@@ -85,3 +85,11 @@
     git:
       repo: "https://github.com/seancarlisle/capacity-script"
       dest: "/root/capacity_gather/capacity-script"
+  - name: Add script run to crontab
+    cron:
+      minute: "*/2"
+      hour: "*"
+      day: "*"
+      weekday: "*"
+      month: "*"
+      job: "/root/capacity_gather/bin/python3 /root/capacity_gather/report_capacity_info.py"
