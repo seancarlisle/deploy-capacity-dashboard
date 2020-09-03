@@ -76,7 +76,7 @@
   - name: Create the python virtual environment
     command: "python3 -m venv /root/capacity_gather"
   - name: Install required python libraries
-    command: "/root/capacity_gather/bin/pip3 install {{ item }}"
+    command: "/root/capacity_gather/bin/pip3 --isolated install {{ item }}"
     with_items:
       - wheel
       - shade
